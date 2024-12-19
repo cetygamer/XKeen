@@ -1594,6 +1594,11 @@ logs_file_check_xray_xkeen() {
 		info_content="$info_content\t[info] Файл «05_routing.json» найден\n"
 	fi
 
+	if [ ! -f "/opt/etc/xray/configs/06_policy.json" ]; then
+		error_content="$error_content\t[error] Файл «06_policy.json» не найден\n"
+	else
+		info_content="$info_content\t[info] Файл «06_policy.json» найден\n"
+	fi
 
 	if [ ! -f "/opt/etc/init.d/S24xray" ]; then
 		error_content="$error_content\t[error] Файл «S24xray» не найден\n"
@@ -1827,64 +1832,34 @@ logs_file_check_xkeen_xkeen() {
 		info_content="$info_content\t[info] Файл «01_log.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/02_stats.json" ]; then
-		error_content="$error_content\t[error] Файл «02_stats.json» не найден\n"
+	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/02_transport.json" ]; then
+		error_content="$error_content\t[error] Файл «02_transport.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «02_stats.json» найден\n"
+		info_content="$info_content\t[info] Файл «02_transport.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/03_dns.json" ]; then
-		error_content="$error_content\t[error] Файл «03_dns.json» не найден\n"
+	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/03_inbounds.json" ]; then
+		error_content="$error_content\t[error] Файл «03_inbounds.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «03_dns.json» найден\n"
+		info_content="$info_content\t[info] Файл «03_inbounds.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/04_reverse.json" ]; then
-		error_content="$error_content\t[error] Файл «04_reverse.json» не найден\n"
+	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/04_outbounds.json" ]; then
+		error_content="$error_content\t[error] Файл «04_outbounds.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «04_reverse.json» найден\n"
+		info_content="$info_content\t[info] Файл «04_outbounds.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/05_fake-dns.json" ]; then
-		error_content="$error_content\t[error] Файл «05_fake-dns.json» не найден\n"
+	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/05_routing.json" ]; then
+		error_content="$error_content\t[error] Файл «05_routing.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «05_fake-dns.json» найден\n"
+		info_content="$info_content\t[info] Файл «05_routing.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/06_transport.json" ]; then
-		error_content="$error_content\t[error] Файл «06_transport.json» не найден\n"
+	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/06_policy.json" ]; then
+		error_content="$error_content\t[error] Файл 06_policy.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «06_transport.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/07_inbounds.json" ]; then
-		error_content="$error_content\t[error] Файл «07_inbounds.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «07_inbounds.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/08_outbounds.json" ]; then
-		error_content="$error_content\t[error] Файл «08_outbounds.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «08_outbounds.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/09_policy.json" ]; then
-		error_content="$error_content\t[error] Файл «09_policy.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «09_policy.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/10_routing.json" ]; then
-		error_content="$error_content\t[error] Файл «10_routing.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «10_routing.json» найден\n"
-	fi
-	
-	if [ ! -f "/opt/sbin/.xkeen/02_install/08_install_configs/02_configs_dir/11_fallbacks.json" ]; then
-		error_content="$error_content\t[error] Файл «11_fallbacks.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «11_fallbacks.json» найден\n"
+		info_content="$info_content\t[info] Файл «06_policy.json» найден\n"
 	fi
 
 	if [ ! -f "/opt/sbin/.xkeen/03_delete/00_delete_import.sh" ]; then
