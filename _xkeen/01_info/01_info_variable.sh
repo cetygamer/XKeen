@@ -46,7 +46,7 @@ current_datetime=$(date "+%d-%b-%y_%H-%M")
 # -------------------------------------
 # API URL
 # -------------------------------------
-xray_api_url="https://api.github.com/repos/XTLS/Xray-core/releases/tags/v1.8.4"  # url api для xray
+xray_api_url="https://api.github.com/repos/XTLS/Xray-core/releases/latest"  # url api для xray
 xkeen_api_url="https://api.github.com/repos/skrill0/xkeen/releases/latest"	# url api для xkeen
 
 # -------------------------------------
