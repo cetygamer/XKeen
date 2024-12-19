@@ -1246,7 +1246,7 @@ logs_register_xray_status_info_xkeen() {
     local info_content=""
     local error_content=""
 
-    if grep -q "Package: xray_s" "$status_file"; then
+    if grep -q "Package: xray" "$status_file"; then
         info_content="\t[info] Запись Xray найдена в «$status_file»"
     else
         error_content="\t[error] Запись Xray не найдена в «$status_file»"
@@ -1388,19 +1388,19 @@ logs_delete_register_xray_info_xkeen() {
     local info_content=""
     local error_content=""
 
-    if [ ! -f "$register_dir/xray_s.list" ]; then
+    if [ ! -f "$register_dir/xray.list" ]; then
         info_content="$info_content\t[info] Файл xray.list не найден в директории «$register_dir/»\n"
     else
         error_content="$error_content\t[error] Файл xray.list найден в директории «$register_dir/»\n"
     fi
 
-    if [ ! -f "$register_dir/xray_s.control" ]; then
+    if [ ! -f "$register_dir/xray.control" ]; then
         info_content="$info_content\t[info] Файл xray.control не найден в директории «$register_dir/»\n"
     else
         error_content="$error_content\t[error] Файл xray.control найден в директории «$register_dir/»\n"
     fi
 
-    if ! grep -q 'Package: xray_s' "$status_file"; then
+    if ! grep -q 'Package: xray' "$status_file"; then
         info_content="$info_content\t[info] Регистрация пакета xray не обнаружена в «$status_file»"
     else
         error_content="$error_content\t[error] Регистрация пакета xray обнаружена в «$status_file»"

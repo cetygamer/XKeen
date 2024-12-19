@@ -1,10 +1,10 @@
 delete_register_xray() {
     # Удаляем соответствующие записи из файла статуса opkg
-    sed -i -e '/Package: xray_s/,/Installed-Time:/d' "/opt/lib/opkg/status"
+    sed -i -e '/Package: xray/,/Installed-Time:/d' "/opt/lib/opkg/status"
     
     # Удаляем файлы регистрации, если они существуют
-    if [ -f "$register_dir/xray_s.control" ] || [ -f "$register_dir/xray_s.list" ]; then
-        rm -f "$register_dir/xray_s.control" "$register_dir/xray_s.list"
+    if [ -f "$register_dir/xray.control" ] || [ -f "$register_dir/xray.list" ]; then
+        rm -f "$register_dir/xray.control" "$register_dir/xray.list"
     fi
 }
 

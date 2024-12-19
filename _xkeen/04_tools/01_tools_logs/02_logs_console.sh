@@ -282,7 +282,7 @@ logs_register_xray_status_info_console() {
     local info_content=""
     local error_content=""
 
-    if grep -q "Package: xray_s" "$status_file"; then
+    if grep -q "Package: xray" "$status_file"; then
         info_content="     ${green}Успешно:${reset} Запись Xray найдена в «$status_file»"
     else
         error_content="     ${red}Ошибка:${reset} Запись Xray не найдена в «$status_file»"

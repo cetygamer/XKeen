@@ -3,12 +3,12 @@
 register_xray_control() {
 
     # Создание файла xray.control
-    cat << EOF > "$register_dir/xray_s.control"
-Package: xray_s
+    cat << EOF > "$register_dir/xray.control"
+Package: xray
 Version: $xray_current_version
 Depends: libc, libssp, librt, libpthread, ca-bundle
 Source: XTLS Team
-SourceName: xray_s
+SourceName: xray
 Section: net
 SourceDateEpoch: $source_date_epoch
 Maintainer: Skrill
@@ -20,28 +20,28 @@ EOF
 
 register_xray_list() {
     cd "$register_dir/" || exit
-    touch xray_s.list
+    touch xray.list
 
 # Генерация списка файлов
     find /opt/etc/xray/dat -type f | while read file; do
-        echo "$file" >> xray_s.list
+        echo "$file" >> xray.list
     done
 
     find /opt/etc/xray/configs -type f | while read file; do
-        echo "$file" >> xray_s.list
+        echo "$file" >> xray.list
     done
 
     find /opt/var/log/xray -type f | while read file; do
-        echo "$file" >> xray_s.list
+        echo "$file" >> xray.list
     done
 
     # Добавление дополнительных путей
-    echo "/opt/var/log/xray" >> xray_s.list
-    echo "/opt/etc/xray/configs" >> xray_s.list
-	echo "/opt/etc/xray/dat" >> xray_s.list
-	echo "/opt/etc/xray" >> xray_s.list
-	echo "/opt/sbin/xray" >> xray_s.list
-	echo "/opt/etc/init.d/S24xray" >> xray_s.list
+    echo "/opt/var/log/xray" >> xray.list
+    echo "/opt/etc/xray/configs" >> xray.list
+	echo "/opt/etc/xray/dat" >> xray.list
+	echo "/opt/etc/xray" >> xray.list
+	echo "/opt/sbin/xray" >> xray.list
+	echo "/opt/etc/init.d/S24xray" >> xray.list
 }
 
 register_xray_status() {
@@ -54,7 +54,7 @@ register_xray_status() {
     done
 
     # Генерация новой записи
-    echo "Package: xray_s" > new_entry.txt
+    echo "Package: xray" > new_entry.txt
     echo "Version: $xray_current_version" >> new_entry.txt
     echo "Depends: libc, libssp, librt, libpthread, ca-bundle" >> new_entry.txt
     echo "Status: install user installed" >> new_entry.txt
