@@ -70,7 +70,7 @@ author_feedback() {
 	echo "     alinajoeyone@gmail.com"
 	echo
     echo -e "  ${yellow}telegram${reset}"
-	echo "     t.me/skkrill"
+	echo "     t.me/Skrill_zerro"
 	echo
     echo -e "  ${yellow}telegram помощника${reset}"
 	echo "     t.me/skride"

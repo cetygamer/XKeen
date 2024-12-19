@@ -1,4 +1,6 @@
-# Определение цветов для вывода в терминал
+# -------------------------------------
+# Цвета
+# -------------------------------------
 green="\033[32m"      # Зеленый
 red="\033[31m"        # Красный
 yellow="\033[33m"     # Желтый
@@ -7,9 +9,8 @@ dark_gray="\e[90m"    # Темно-серый
 reset="\033[0m"       # Сброс цветов
 
 # -------------------------------------
-# Определение директорий
+# Директории
 # -------------------------------------
-
 tmp_dir_global="/opt/tmp"            # Временная директория общая
 tmp_dir="/opt/tmp/xkeen"             # Временная директория xkeen
 xkeen_log_dir="/opt/var/log/xkeen"   # Директория логов для xkeen
@@ -27,13 +28,15 @@ xkeen_conf_dir="$xkeen_dir/02_install/08_install_configs/02_configs_dir/" # Ди
 register_dir="/opt/lib/opkg/info"
 status_file="/opt/lib/opkg/status"
 releases_dir="/opt/releases"
-app_name=Xkeen
-xkeen_current_version="0.8.2"
+os_modules="/lib/modules/$(uname -r)"
+user_modules="/opt/lib/modules"
+app_name=XKeen
+xkeen_current_version="1.1.3"
+init_current_verison="2.19"
 
 # -------------------------------------
-# Определение временных значений
+# Время
 # -------------------------------------
-
 installed_time=$(date +%s)
 existing_content=$(cat "$status_file")
 installed_size=$(du -s "$install_dir" | cut -f1)
@@ -41,18 +44,14 @@ source_date_epoch=$(date +%s)
 current_datetime=$(date "+%d-%b-%y_%H-%M")
 
 # -------------------------------------
-# Определение url api
+# API URL
 # -------------------------------------
-
-xray_api_url_reserv="https://api.github.com/repos/yichya/openwrt-xray/releases/latest"  # url резервного api для xray
-xray_api_url="https://api.github.com/repos/XTLS/Xray-core/releases/latest"  # url api для xray
+xray_api_url="https://api.github.com/repos/XTLS/Xray-core/releases/tags/v1.8.4"  # url api для xray
 xkeen_api_url="https://api.github.com/repos/skrill0/xkeen/releases/latest"	# url api для xkeen
 
 # -------------------------------------
 # Создание директорий и файлов
 # -------------------------------------
-
-# Проверка и создание директорий логов, если не существуют
 mkdir -p "$xkeen_log_dir" || { echo "Ошибка: Не удалось создать директорию $xkeen_log_dir"; exit 1; }
 mkdir -p "$xray_log_dir" || { echo "Ошибка: Не удалось создать директорию $xray_log_dir"; exit 1; }
 mkdir -p "$initd_dir" || { echo "Ошибка: Не удалось создать директорию $initd_dir"; exit 1; }
@@ -62,16 +61,14 @@ mkdir -p "$install_dir" || { echo "Ошибка: Не удалось созда�
 mkdir -p "$cron_dir" || { echo "Ошибка: Не удалось создать директорию $cron_dir"; exit 1; }
 
 # -------------------------------------
-# Определение файлов логов
+# Журналы
 # -------------------------------------
-
 xkeen_info_log="$xkeen_log_dir/info.log"
 xkeen_error_log="$xkeen_log_dir/error.log"
 
 xray_access_log="$xray_log_dir/access.log"
 xray_error_log="$xray_log_dir/error.log"
 
-# Создание .log файлов, если они не существуют
 touch "$xkeen_info_log" || { echo "Ошибка: Не удалось создать файл $xkeen_info_log"; exit 1; }
 touch "$xkeen_error_log" || { echo "Ошибка: Не удалось создать файл $xkeen_error_log"; exit 1; }
 
@@ -79,7 +76,7 @@ touch "$xray_access_log" || { echo "Ошибка: Не удалось созда
 touch "$xray_error_log" || { echo "Ошибка: Не удалось создать файл $xkeen_error_log"; exit 1; }
 
 # -------------------------------------
-# Функция для вызова api с обработкой ошибок
+# Вызов API
 # -------------------------------------
 
 call_api() {

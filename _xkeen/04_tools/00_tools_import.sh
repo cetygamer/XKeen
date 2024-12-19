@@ -13,5 +13,9 @@
 
 # Дополнительные инструменты
 . "$xtools_dir/05_tools_archive.sh"
-
+. "$xtools_dir/06_tools_ports.sh"
+. "$xtools_dir/07_tools_module.sh"
+. "$xtools_dir/08_tools_diagnostic.sh"
+. "$xtools_dir/09_tools_delay.sh"
+. "$xtools_dir/10_tools_fixed.sh"
 

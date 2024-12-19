@@ -7,7 +7,12 @@ delete_tmp() {
     if [ -f "$cron_dir/root.tmp" ]; then
         rm "$cron_dir/root.tmp"
     fi
-	echo -e "  Приступаю к ${yellow}очистке временных файлов${reset} после работы Xkeen…"
+	
+    if [ -f "/opt/etc/ndm/netfilter.d/xray.sh" ]; then
+        rm "/opt/etc/ndm/netfilter.d/xray.sh"
+    fi
+	
+	echo -e "  Выполняется ${yellow}очистка временных файлов${reset} после работы Xkeen"
 	sleep 1
-	echo -e "  Очистка временных файлов после работы Xkeen ${green}успешно выполнена${reset}"
+	echo -e "  Очистка временных файлов ${green}успешно выполнена${reset}"
 }

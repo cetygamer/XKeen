@@ -10,11 +10,13 @@ install_configs() {
 
         for file in $xkeen_files; do
             filename=$(basename "$file" .json)
-            if [ -f "$install_conf_dir/$filename.json" ]; then
+            base_filename=$(echo $filename | cut -d'_' -f 2)
+            if ls $install_conf_dir | grep -q "$base_filename"; then
                 files_to_replace="$files_to_replace $filename"
             else
                 cp "$file" "$install_conf_dir/"
-                echo -e "  Файл ${yellow}$filename${reset} скопирован."
+				echo -e "  Добавлены следующие шаблоны конфигураций"
+                echo -e "  ${yellow}$filename${reset}"
             fi
         done
 
@@ -22,12 +24,12 @@ install_configs() {
             echo
             echo
             echo -e "  У Вас уже есть конфигурация ${yellow}xray${reset}."
-            echo -e "  Хотите ${yellow}заменить${reset} следующие файлы?"
+            echo -e "  Хотите ${yellow}заменить${reset} следующие файлы на стандартные Xkeen?"
             echo
-            for filename in $files_to_replace; do
-                echo -e "     $filename"
-            done
-
+			for filename in $files_to_replace; do
+				base_filename=$(echo $filename | cut -d'_' -f 2)
+				echo -e "     $base_filename"
+			done
             echo
             echo -e "  В случае согласия будет выполнено ${yellow}резервное копирование${reset} Ваших файлов."
             echo -e "  Вы сможете найти их в директории «${yellow}/opt/backups/${reset}»."

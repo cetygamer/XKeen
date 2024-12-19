@@ -1,27 +1,36 @@
+# Функция для регистрации инициализационного скрипта cron
 register_cron_initd() {
-    local initd_file="$initd_dir/S05crond"
+    # Проверка наличия пакета cron
+    if opkg list-installed | grep -q cron; then
+        return
+    fi
+
+    # Определение переменных
+    local initd_file="${initd_dir}/S05crond"
     local s05crond_filename="${current_datetime}_S05crond"
-    local required_script_version="0.3"
+    local required_script_version="0.4"
 
-    # Проверяем наличие файла S05crond
-    if [ -e "$initd_file" ]; then
-        local current_content="$(cat "$initd_file")"
-        local script_version=$(grep 'version=' "$initd_file" | grep -o '[0-9.]\+')
+    # Проверка наличия файла S05crond
+    if [ -e "${initd_file}" ]; then
+        # Получение текущей версии скрипта
+        local script_version=$(grep 'version=' "${initd_file}" | grep -o '[0-9.]\+')
 
-        if [ "$script_version" != "$required_script_version" ]; then
-            local backup_path="$backups_dir/$s05crond_filename"
+        # Проверка версии скрипта
+        if [ "${script_version}" != "${required_script_version}" ]; then
+            # Определение пути для резервной копии
+            local backup_path="${backups_dir}/${s05crond_filename}"
 
-            # Перемещаем файл в каталог резервных копий с новым именем
-            mv "$initd_file" "$backup_path"
-
-            echo -e "  Ваш файл «${green}S05crond${reset}» перемещен в каталог резервных копий «${yellow}$backup_path${reset}»"
+            # Перемещение файла в каталог резервных копий с новым именем
+            mv "${initd_file}" "${backup_path}"
+            echo -e "  Ваш файл «${green}S05crond${reset}» перемещен в каталог резервных копий «${yellow}${backup_path}${reset}»"
         fi
     fi
 
+    # Содержимое скрипта
     local script_content='#!/bin/sh
 ### Начало информации о службе
 # Краткое описание: Запуск / Остановка Cron
-# version="0.3"  # Версия скрипта
+# version="0.4"  # Версия скрипта
 ### Конец информации о службе
 
 green="\033[32m"
@@ -70,32 +79,26 @@ restart() {
 # Обработка аргументов командной строки
 case "$1" in
     start)
-        start
-        ;;
+        start;;
     stop)
-        stop
-        ;;
+        stop;;
     restart)
-        restart
-        ;;
+        restart;;
     status)
         if cron_status; then
             echo -e "  Cron ${green}запущен${reset}"
         else
             echo -e "  Cron ${red}не запущен${reset}"
-        fi
-        ;;
+        fi;;
     *)
-    echo -e "  Команды: ${green}start${reset} | ${red}stop${reset} | ${yellow}restart${reset} | status"
-        ;;
+        echo -e "  Команды: ${green}start${reset} | ${red}stop${reset} | ${yellow}restart${reset} | status";;
 esac
 
-exit 0
-'
-
-    # Создание или замена файла
-    if [ "$script_version" != "$required_script_version" ]; then
-        echo -e "$script_content" > "$initd_file"
-        chmod +x "$initd_file"
-    fi
+exit 0'
+    
+    # Создание или замена файла, если версия скрипта не соответствует требуемой версии 
+    if [ "${script_version}" != "${required_script_version}" ]; then 
+        echo -e "${script_content}" > "${initd_file}" 
+        chmod +x "${initd_file}" 
+    fi 
 }

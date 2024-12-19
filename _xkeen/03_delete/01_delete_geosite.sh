@@ -17,6 +17,12 @@ delete_geosite() {
             rm "$geo_dir/geosite_v2fly.dat"
         fi
     fi
+	
+	if [ "$chose_delete_geosite_zkeen_select" == "true" ]; then
+        if [ -f "$geo_dir/geosite_zkeen.dat" ]; then
+            rm "$geo_dir/geosite_zkeen.dat"
+        fi
+    fi
 }
 
 # Функция для удаления всех файлов GeoSite
@@ -31,5 +37,9 @@ delete_geosite_key() {
 
     if [ -f "$geo_dir/geosite_v2fly.dat" ]; then
         rm "$geo_dir/geosite_v2fly.dat"
+    fi
+	
+	if [ -f "$geo_dir/geosite_zkeen.dat" ]; then
+        rm "$geo_dir/geosite_zkeen.dat"
     fi
 }

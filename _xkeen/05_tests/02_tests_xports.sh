@@ -12,9 +12,10 @@ tests_ports_xray() {
         local printed=false
         IFS=$'\n'
         for line in $listening_ports_tcp $listening_ports_udp; do
-            gateway=$(echo "$line" | awk '{print $4}' | cut -d':' -f1)
-            port=$(echo "$line" | awk '{print $4}' | cut -d':' -f2)
-            protocol=""
+            local gateway=""
+            local port=""
+            local protocol=""
+            
             if [ -n "$(echo "$line" | grep "tcp")" ]; then
                 protocol="TCP"
             fi
@@ -25,6 +26,17 @@ tests_ports_xray() {
                     protocol="UDP"
                 fi
             fi
+            
+            if [[ "$line" == *::* ]]; then
+                # IPv6 адрес
+                gateway="::"
+                port=$(echo "$line" | awk '{print $4}' | awk -F':' '{print $NF}')
+            else
+                # IPv4 адрес
+                gateway=$(echo "$line" | awk '{print $4}' | cut -d':' -f1)
+                port=$(echo "$line" | awk '{print $4}' | cut -d':' -f2)
+            fi
+            
             if [ "$printed" = false ]; then
                 echo -e "$output"
                 printed=true

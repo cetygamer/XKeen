@@ -20,4 +20,11 @@ info_geosite() {
     else
         geo_exists_geosite_v2fly="not_installed"
     fi
+	
+	# Проверяем наличие файла geosite_zkeen.dat
+    if [ -e "$geo_dir/geosite_zkeen.dat" ]; then
+        geo_exists_geosite_zkeen="installed"
+    else
+        geo_exists_geosite_zkeen="not_installed"
+    fi
 }

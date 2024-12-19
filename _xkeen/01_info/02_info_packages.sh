@@ -46,3 +46,6 @@ info_packages_libpthread=$package_status
 info_packages "ca-bundle"
 info_packages_cabundle=$package_status
 
+# Проверка наличия пакета "iptables"
+info_packages "iptables"
+info_packages_iptables=$package_status

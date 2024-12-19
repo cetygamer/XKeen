@@ -1246,7 +1246,7 @@ logs_register_xray_status_info_xkeen() {
     local info_content=""
     local error_content=""
 
-    if grep -q "Package: xray" "$status_file"; then
+    if grep -q "Package: xray_s" "$status_file"; then
         info_content="\t[info] Запись Xray найдена в «$status_file»"
     else
         error_content="\t[error] Запись Xray не найдена в «$status_file»"
@@ -1388,19 +1388,19 @@ logs_delete_register_xray_info_xkeen() {
     local info_content=""
     local error_content=""
 
-    if [ ! -f "$register_dir/xray.list" ]; then
+    if [ ! -f "$register_dir/xray_s.list" ]; then
         info_content="$info_content\t[info] Файл xray.list не найден в директории «$register_dir/»\n"
     else
         error_content="$error_content\t[error] Файл xray.list найден в директории «$register_dir/»\n"
     fi
 
-    if [ ! -f "$register_dir/xray.control" ]; then
+    if [ ! -f "$register_dir/xray_s.control" ]; then
         info_content="$info_content\t[info] Файл xray.control не найден в директории «$register_dir/»\n"
     else
         error_content="$error_content\t[error] Файл xray.control найден в директории «$register_dir/»\n"
     fi
 
-    if ! grep -q 'Package: xray' "$status_file"; then
+    if ! grep -q 'Package: xray_s' "$status_file"; then
         info_content="$info_content\t[info] Регистрация пакета xray не обнаружена в «$status_file»"
     else
         error_content="$error_content\t[error] Регистрация пакета xray обнаружена в «$status_file»"
@@ -1570,65 +1570,30 @@ logs_file_check_xray_xkeen() {
 		info_content="$info_content\t[info] Файл «01_log.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/etc/xray/configs/02_stats.json" ]; then
-		error_content="$error_content\t[error] Файл «02_stats.json» не найден\n"
+	if [ ! -f "/opt/etc/xray/configs/02_transport.json" ]; then
+		error_content="$error_content\t[error] Файл «02_transport.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «02_stats.json» найден\n"
+		info_content="$info_content\t[info] Файл «02_transport.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/etc/xray/configs/03_dns.json" ]; then
-		error_content="$error_content\t[error] Файл «03_dns.json» не найден\n"
+	if [ ! -f "/opt/etc/xray/configs/04_inbounds.json" ]; then
+		error_content="$error_content\t[error] Файл «03_inbounds.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «03_dns.json» найден\n"
+		info_content="$info_content\t[info] Файл «03_inbounds.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/etc/xray/configs/04_reverse.json" ]; then
-		error_content="$error_content\t[error] Файл «04_reverse.json» не найден\n"
+	if [ ! -f "/opt/etc/xray/configs/05_outbounds.json" ]; then
+		error_content="$error_content\t[error] Файл «04_outbounds.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «04_reverse.json» найден\n"
+		info_content="$info_content\t[info] Файл «04_outbounds.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/etc/xray/configs/05_fake-dns.json" ]; then
-		error_content="$error_content\t[error] Файл «05_fake-dns.json» не найден\n"
+	if [ ! -f "/opt/etc/xray/configs/05_routing.json" ]; then
+		error_content="$error_content\t[error] Файл «05_routing.json» не найден\n"
 	else
-		info_content="$info_content\t[info] Файл «05_fake-dns.json» найден\n"
+		info_content="$info_content\t[info] Файл «05_routing.json» найден\n"
 	fi
 
-	if [ ! -f "/opt/etc/xray/configs/06_transport.json" ]; then
-		error_content="$error_content\t[error] Файл «06_transport.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «06_transport.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/etc/xray/configs/07_inbounds.json" ]; then
-		error_content="$error_content\t[error] Файл «07_inbounds.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «07_inbounds.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/etc/xray/configs/08_outbounds.json" ]; then
-		error_content="$error_content\t[error] Файл «08_outbounds.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «08_outbounds.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/etc/xray/configs/09_policy.json" ]; then
-		error_content="$error_content\t[error] Файл «09_policy.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «09_policy.json» найден\n"
-	fi
-
-	if [ ! -f "/opt/etc/xray/configs/10_routing.json" ]; then
-		error_content="$error_content\t[error] Файл «10_routing.json» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «10_routing.json» найден\n"
-	fi
-	
-		if [ ! -f "/opt/etc/xray/configs/11_fallbacks.json" ]; then
-		error_content="$error_content\t[error] Файл «11_fallbacks» не найден\n"
-	else
-		info_content="$info_content\t[info] Файл «11_fallbacks.json» найден\n"
-	fi
 
 	if [ ! -f "/opt/etc/init.d/S24xray" ]; then
 		error_content="$error_content\t[error] Файл «S24xray» не найден\n"
@@ -2082,6 +2047,12 @@ logs_file_check_xkeen_xkeen() {
 		error_content="$error_content\t[error] Файл «05_tools_archive.sh» не найден\n"
 	else
 		info_content="$info_content\t[info] Файл «05_tools_archive.sh» найден\n"
+	fi
+	
+	if [ ! -f "/opt/sbin/.xkeen/04_tools/06_tools_ports.sh" ]; then
+		error_content="$error_content\t[error] Файл «06_tools_ports.sh» не найден\n"
+	else
+		info_content="$info_content\t[info] Файл «06_tools_ports.sh» найден\n"
 	fi
 
 	if [ ! -f "/opt/sbin/.xkeen/05_tests/00_tests_import.sh" ]; then

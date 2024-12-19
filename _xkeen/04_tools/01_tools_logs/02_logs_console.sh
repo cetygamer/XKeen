@@ -282,7 +282,7 @@ logs_register_xray_status_info_console() {
     local info_content=""
     local error_content=""
 
-    if grep -q "Package: xray" "$status_file"; then
+    if grep -q "Package: xray_s" "$status_file"; then
         info_content="     ${green}Успешно:${reset} Запись Xray найдена в «$status_file»"
     else
         error_content="     ${red}Ошибка:${reset} Запись Xray не найдена в «$status_file»"
@@ -361,7 +361,7 @@ logs_install_cron_info_console() {
             if [ -n "$chose_all_cron_time" ] || [ -n "$chose_geoip_cron_time" ]; then
                 if grep -q "$install_dir/xkeen.*-ugi" "$cron_file_path"; then
                     task="GeoIP"
-                    cron_entry=$(grep "$install_dir/xkeen.*-ugic" "$cron_file_path")
+                    cron_entry=$(grep "$install_dir/xkeen.*-ugi" "$cron_file_path")
                     info_content="     ${green}Успешно:${reset} Запись для задачи автоматического обновления $task существует"
                     info_content="${info_content}\n     ${green}Успешно:${reset} $cron_entry"
                     last_line="$cron_entry"
@@ -373,7 +373,7 @@ logs_install_cron_info_console() {
             if [ -n "$chose_all_cron_time" ] || [ -n "$chose_geosite_cron_time" ]; then
                 if grep -q "$install_dir/xkeen.*-ugs" "$cron_file_path"; then
                     task="GeoSite"
-                    cron_entry=$(grep "$install_dir/xkeen.*-ugsc" "$cron_file_path")
+                    cron_entry=$(grep "$install_dir/xkeen.*-ugs" "$cron_file_path")
                     info_content="${info_content}\n     ${green}Успешно:${reset} Запись для задачи автоматического обновления $task существует"
                     info_content="${info_content}\n     ${green}Успешно:${reset} $cron_entry"
                     last_line="$cron_entry"
@@ -385,7 +385,7 @@ logs_install_cron_info_console() {
             if [ -n "$chose_all_cron_time" ] || [ -n "$chose_xkeen_cron_time" ]; then
                 if grep -q "$install_dir/xkeen.*-uk" "$cron_file_path"; then
                     task="Xkeen"
-                    cron_entry=$(grep "$install_dir/xkeen.*-ukc" "$cron_file_path")
+                    cron_entry=$(grep "$install_dir/xkeen.*-uk" "$cron_file_path")
                     info_content="${info_content}\n     ${green}Успешно:${reset} Запись для задачи автоматического обновления $task существует"
                     info_content="${info_content}\n     ${green}Успешно:${reset} $cron_entry"
                     last_line="$cron_entry"
@@ -397,7 +397,7 @@ logs_install_cron_info_console() {
             if [ -n "$chose_all_cron_time" ] || [ -n "$chose_xray_cron_time" ]; then
                 if grep -q "$install_dir/xkeen.*-ux" "$cron_file_path"; then
                     task="Xray"
-                    cron_entry=$(grep "$install_dir/xkeen.*-uxc" "$cron_file_path")
+                    cron_entry=$(grep "$install_dir/xkeen.*-ux" "$cron_file_path")
                     info_content="${info_content}\n     ${green}Успешно:${reset} Запись для задачи автоматического обновления $task существует"
                     info_content="${info_content}\n     ${green}Успешно:${reset} $cron_entry"
                     last_line="$cron_entry"

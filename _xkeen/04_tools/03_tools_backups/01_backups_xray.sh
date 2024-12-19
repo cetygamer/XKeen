@@ -21,13 +21,15 @@ restore_backup_xray() {
     
     if [ -n "$latest_backup" ]; then
         backup_path="$backups_dir/$latest_backup"
-        cp "$backup_path" "$install_dir/xray" 2>/dev/null
+        
+		rm "$install_dir/xray"
+		cp "$backup_path" "$install_dir/xray" 2>/dev/null
 
         # Проверка успешности восстановления резервной копии
         if [ $? -eq 0 ]; then
             echo -e "  Xray ${green}успешно восстановлен${reset} из резервной копии"
         else
-            echo -e "  ${red}Ошибка${reset} при восстановлении Xray из резервной копии"
+		echo -e "  ${red}Ошибка${reset} при восстановлении Xray из резервной копии"
         fi
     else
         echo -e "  ${dark_gray}Нет доступных резервных копий Xray${reset}"

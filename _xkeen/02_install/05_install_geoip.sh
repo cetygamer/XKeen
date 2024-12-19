@@ -3,7 +3,7 @@ install_geoip() {
 	mkdir -p "$geo_dir" || { echo "Ошибка: Не удалось создать директорию $geo_dir"; exit 1; }
     # Установка GeoIP AntiFilter
     if [ "$install_antifilter_geoip" = true ]; then
-        curl -L -o "$geo_dir/geoip_antifilter.dat" "https://github.com/schebotar/antifilter/releases/latest/download/geoip.dat" > /dev/null 2>&1
+        curl -L -o "$geo_dir/geoip_antifilter.dat" "https://github.com/Skrill0/AntiFilter-IP/releases/latest/download/geoip.dat" > /dev/null 2>&1
         if [ $? -eq 0 ] && [ -s "$geo_dir/geoip_antifilter.dat" ]; then
             echo -e "  GeoIP AntiFilter ${green}успешно установлен${reset}"
         else
@@ -23,7 +23,7 @@ install_geoip() {
 
     # Обновление GeoIP AntiFilter, если установлены и требуется обновление
     if [ "$update_antifilter_geoip" = true ] && [ -f "$geo_dir/geoip_antifilter.dat" ]; then
-        curl -L -o "$geo_dir/geoip_antifilter.dat" "https://github.com/schebotar/antifilter/releases/latest/download/geoip.dat" > /dev/null 2>&1
+        curl -L -o "$geo_dir/geoip_antifilter.dat" "https://github.com/Skrill0/AntiFilter-IP/releases/latest/download/geoip.dat" > /dev/null 2>&1
         if [ $? -eq 0 ] && [ -s "$geo_dir/geoip_antifilter.dat" ]; then
             echo -e "  GeoIP AntiFilter ${green}успешно обновлен${reset}"
         else
