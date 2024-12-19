@@ -1273,26 +1273,19 @@ while [ $# -gt 0 ]; do
 			
 		-start)	# Запуск Xray	
 				eval "/opt/etc/init.d/S24xray start" 
-				sleep 2
-				$SHELL
 
-				
             shift
             ;;	
 			
 		-stop)	# Остановка Xray			
 				eval "/opt/etc/init.d/S24xray stop" 
-				sleep 2
-				$SHELL
-				
+
             shift
             ;;		
 			
 		-restart)	# Перезапуск Xray			
 				eval "/opt/etc/init.d/S24xray restart" 
-				sleep 2
-				$SHELL
-				
+
             shift
             ;;				
 			
