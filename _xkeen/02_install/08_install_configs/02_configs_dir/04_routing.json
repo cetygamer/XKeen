@@ -2,6 +2,7 @@
 
 {
   "routing": {
+    "domainStrategy": "IPIfNonMatch",
     "rules": [
             
       // Прямые подключение  |  Доменные имена
